@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roti John Cheese Putrajaya</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #fffbe7; color: #1e293b; }
+    header {
+      background: #ffcc33;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .logo { font-size: 1.5rem; font-weight: bold; color: #1e293b; }
+    nav a {
+      margin-left: 1.5rem;
+      color: #1e293b;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .hero {
+      height: 100vh;
+      background: url('https://via.placeholder.com/1200x800?text=Cheesy+Roti+John') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 2rem;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      background: rgba(0,0,0,0.6);
+      padding: 1rem 2rem;
+      border-radius: 1rem;
+    }
+    .section {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .order-track {
+      background: #fef3c7;
+      padding: 2rem;
+      margin-top: 2rem;
+      border-radius: 1rem;
+    }
+    input, button {
+      padding: 0.6rem;
+      margin: 0.5rem;
+      font-size: 1rem;
+    }
+    footer {
+      background: #1e293b;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Roti John Cheese</div>
+    <nav>
+      <a href="#menu">Menu</a>
+      <a href="#track">Track Order</a>
+      <a href="#about">Story</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>🔥 Melty Cheesy Roti John, Straight from the Pan! 🔥</h1>
+  </section>
+
+  <section id="track" class="section">
+    <h2>🔍 Track Your Order</h2>
+    <div class="order-track">
+      <p>Scan your order QR or enter order number below:</p>
+      <input type="text" id="orderId" placeholder="Enter Order Number" />
+      <button onclick="trackOrder()">Track</button>
+      <div id="statusDisplay" style="margin-top: 1rem; font-weight: bold;"></div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <h2>📖 Our Story</h2>
+    <p style="max-width: 700px; margin: auto; padding-top: 1rem;">
+      This isn't your average Roti John. Ours is a family recipe with chicken cooked for 3+ hours in spices,
+      spread on BOTH sides of the bun, layered with egg and topped with nacho-mayo cheese. That’s what makes it
+      legendary in Putrajaya!
+    </p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Roti John Cheese Putrajaya. All rights reserved.</p>
+  </footer>
+
+  <!-- Firebase for order tracking -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyB7Q2YePqfx8iHcnAd7w6G2opwcRmF7G3g",
+      authDomain: "hydrawarepos.firebaseapp.com",
+      projectId: "hydrawarepos",
+      storageBucket: "hydrawarepos.appspot.com",
+      messagingSenderId: "1060019914405",
+      appId: "1:1060019914405:web:95af9f011a54d86d006f4c"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    async function trackOrder() {
+      const orderId = document.getElementById('orderId').value.trim();
+      const statusDisplay = document.getElementById('statusDisplay');
+      if (!orderId) return statusDisplay.innerText = 'Please enter a valid order number';
+
+      const snapshot = await db.collection("orders")
+        .where("orderNumber", "==", parseInt(orderId))
+        .get();
+
+      if (snapshot.empty) {
+        statusDisplay.innerText = "❌ Order not found.";
+        return;
+      }
+
+      snapshot.forEach(doc => {
+        const order = doc.data();
+        if (order.status === "ready to pickup") {
+          statusDisplay.innerText = "✅ Your order is ready to pickup!";
+        } else {
+          statusDisplay.innerText = `🕒 Order is being prepared... (${order.status})`;
+        }
+      });
+    }
+  </script>
+</body>
+</html>
