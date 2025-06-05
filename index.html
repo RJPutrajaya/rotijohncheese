@@ -3,117 +3,107 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Roti John Cheese</title>
+  <title>Roti John Cheese Putrajaya</title>
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
       font-family: 'Segoe UI', sans-serif;
-      background: #fffbe7;
-      color: #1f1f1f;
+      background: #fff8ec;
+      color: #1f2937;
       overflow-x: hidden;
     }
-
     header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: #ffe066;
-      padding: 1.5rem 2rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      background: #facc15;
+      color: #1f2937;
+      padding: 2rem;
+      text-align: center;
+      position: relative;
     }
-
-    h1 {
-      margin: 0;
-      font-size: 2rem;
+    header h1 {
+      font-size: 2.5rem;
       font-weight: bold;
-      color: #5b3600;
     }
-
-    .section {
-      padding: 5rem 2rem;
-      max-width: 1000px;
-      margin: auto;
+    .cheese-drip {
+      position: absolute;
+      bottom: -15px;
+      width: 100%;
+      height: 30px;
+      background: url('https://i.imgur.com/XYv1eXd.png') repeat-x;
+      background-size: contain;
     }
-
-    .hero {
-      background: url('https://images.unsplash.com/photo-1625963253165-592ac95aa09d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80') no-repeat center/cover;
-      height: 100vh;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-shadow: 1px 1px 4px black;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 600px;
+    section {
+      padding: 4rem 2rem;
       text-align: center;
     }
-
-    .section img {
-      width: 100%;
+    .highlight {
+      color: #facc15;
+      font-weight: bold;
+    }
+    .btn {
+      padding: 1rem 2rem;
+      background: #facc15;
+      color: #1f2937;
+      border: none;
+      font-size: 1rem;
       border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin-top: 2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: transform 0.3s;
     }
-
-    .floating-cheese {
+    .btn:hover {
+      transform: scale(1.05);
+    }
+    .sticky-qr {
       position: fixed;
-      top: 10%;
-      left: 50%;
-      width: 150px;
-      transform: translateX(-50%);
-      animation: float 3s ease-in-out infinite;
-      z-index: 0;
-      opacity: 0.2;
+      bottom: 20px;
+      right: 20px;
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      text-align: center;
     }
-
-    @keyframes float {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(-20px); }
+    .sticky-qr img {
+      width: 80px;
     }
-
     footer {
-      background: #fef3c7;
+      background: #1f2937;
+      color: white;
       text-align: center;
       padding: 2rem;
-      font-size: 0.9rem;
-      color: #6b4226;
     }
   </style>
 </head>
 <body>
-
   <header>
-    <h1>Roti John Cheese</h1>
+    <h1>Roti John Cheese Putrajaya</h1>
+    <div class="cheese-drip"></div>
   </header>
 
-  <div class="hero">
-    <h1>Cheese Lava Goodness</h1>
-    <p>Minced chicken cooked with secret spices over 3 hours — spread on toasted eggs, sandwiched in fluffy bread, and drenched in creamy nacho mayo cheese.</p>
-  </div>
+  <section>
+    <h2>Mouth-Watering Roti John With <span class="highlight">Melty Cheese Lava</span></h2>
+    <p>Family recipe with 3-hour slow-cooked spiced minced chicken + egg spread on soft bread, loaded with cheesy mayo sauce!</p>
+    <button class="btn" onclick="window.location.href='https://wa.me/60123456789'">Order Now</button>
+  </section>
 
-  <div class="section">
-    <h2>🔥 Our Signature Recipe</h2>
-    <p>This isn’t just any Roti John. It’s our family’s secret — chicken paste slow-cooked to perfection, eggs freshly cracked, and cheese that stretches for days.</p>
-    <img src="https://images.unsplash.com/photo-1579001415727-1b7f63450c29?auto=format&fit=crop&w=1400&q=80" alt="Roti John" />
-  </div>
+  <section>
+    <h2>Track Your Order</h2>
+    <p>Scan the QR below or click to check your order status live!</p>
+    <button class="btn" onclick="window.location.href='track.html'">Track Order</button>
+  </section>
 
-  <div class="section">
-    <h2>📍Find Us at Putrajaya</h2>
-    <p>Open daily. Bring your appetite. We serve it fresh and loud, the cheesy way you’ll never forget.</p>
+  <div class="sticky-qr">
+    <p style="margin-bottom: 0.5rem">Scan for status:</p>
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://yourdomain.com/track.html" alt="QR Code" />
   </div>
-
-  <img src="https://i.imgur.com/jCVc8iI.png" alt="Melting Cheese" class="floating-cheese" />
 
   <footer>
-    Roti John Cheese © 2025 – Made with 🧀 & ❤️ by the Family.
+    <p>Copyright &copy; 2025 Roti John Cheese Putrajaya</p>
   </footer>
-
 </body>
 </html>
